@@ -8,7 +8,7 @@ import com.census.R
 import com.census.BR
 import com.census.databinding.ActivityLoginBinding
 import com.census.ui.base.BaseActivity
-
+import com.census.ui.dashboard.DashboardActivity
 
 
 import dagger.hilt.android.AndroidEntryPoint
@@ -110,7 +110,7 @@ class LoginActivity :
             viewModel.isErrorTextShowing.value = true
             bindings.tvErrorText.text = "Please enter your password."
         } else {
-//            startActivity(DashboardActivity.newIntent(this))
+            startActivity(DashboardActivity.newIntent(this))
         }
 
 

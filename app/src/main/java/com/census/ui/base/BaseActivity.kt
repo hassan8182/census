@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -160,7 +161,8 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewDataBinding>(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
             //  window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.statusBarColor = Color.TRANSPARENT
+//            window.statusBarColor = Color.TRANSPARENT
+            window.statusBarColor = ContextCompat.getColor(this, R.color.app_blue)
             setStatusBarTextColor(
                 false
             )

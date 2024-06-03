@@ -6,5 +6,6 @@
     <string name="Make_sure_your_wifi_or_celullar_data_is_turned_on_and_then_try_again">Make sure your Wifi or Celullar Data is turned on and then Try again!</string>
     <string name="empty"></string>
     <string name="internet_error">The internet connection appears to be offline.</string>
-
+    <string name="nav_close">Close Navigation Drawer</string>
+    <string name="nav_open">Open</string>
 </resources>
