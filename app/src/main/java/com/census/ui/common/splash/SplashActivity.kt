@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import com.census.BR
 import com.census.R
 import com.census.databinding.ActivitySplashBinding
+import com.census.ui.auth.LoginActivity
 import com.census.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,7 +89,7 @@ class SplashActivity :
     }*/
 
     private fun onAnimationCompleted() {
-
+        startActivity(LoginActivity.newIntent(this))
     }
 
 

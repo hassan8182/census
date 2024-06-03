@@ -99,6 +99,10 @@
 
 
         </activity>
+        <activity
+            android:name="com.census.ui.auth.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
 
 
     </application>

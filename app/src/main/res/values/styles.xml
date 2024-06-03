@@ -45,6 +45,41 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5%</item>
     </style>
+    <style name="roundedCornerEditText">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15%</item>
+    </style>
+    <style name="appTextBtn">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="appText">
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="appTextMedium">
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+    <style name="appTextBold">
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="appTextHeading">
+        <item name="android:textColor">@color/app_text_color</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
 
 
 

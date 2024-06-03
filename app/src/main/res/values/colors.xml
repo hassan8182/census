@@ -24,6 +24,11 @@
     <color name="red_color_picker">#ED0A3F</color>
     <color name="red_orange_color_picker">#FF3F34</color>
     <color name="colorOverlay">#78ffffff</color>
+    <color name="app_text_color">#272D2D</color>
+    <color name="completed">#06D626</color>
+    <color name="incomplete">#E8BD4E</color>
+    <color name="stopped">#F32828</color>
+    <color name="uploaded">#800080</color>
 
     <integer-array name="story_bg_colors_picker">
         <item>@color/app_blue</item>
