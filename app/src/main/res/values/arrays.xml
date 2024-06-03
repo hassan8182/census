@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="reports_types">
+        <item>It\'s a spam</item>
+        <item>Hate speech or symbols</item>
+        <item>Suicide or self-injury</item>
+        <item>Nudity or sexual activity</item>
+        <item>Bullying or harassment</item>
+        <item>False information</item>
+        <item>Violence or dangerous organization</item>
+        <item>Scam or fraud</item>
+        <item>I just don\'t like it</item>
+        <item>Sales of illegal or regulated goods</item>
+        <item>Intellectual property violation</item>
+        <item>Eating disorders</item>
+    </string-array>
+</resources>

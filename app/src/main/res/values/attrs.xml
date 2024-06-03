@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="customEditTextWidget">
+        <attr name="hint" format="string" />
+        <attr name="drawableVisibility" format="boolean" />
+        <attr name="rightDrawable" format="reference" />
+        <attr name="android:inputType" />
+        <attr name="android:imeOptions" format="enum" />
+        <attr name="android:digits" />
+        <attr name="android:text" format="string" />
+        <attr name="android:textColorHint" format="color" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:background" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TextViewDrawableSize">
+        <attr name="compoundDrawableWidth" format="dimension" />
+        <attr name="compoundDrawableHeight" format="dimension" />
+        <attr name="compoundDrawableColor" format="color" />
+        <attr name="boundDrawable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SpannedGridLayoutManager">
+        <attr name="android:orientation" />
+        <attr name="spanCount" />
+        <attr name="aspectRatio" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="noDataOrInternet">
+<!--        <attr name="hint" format="string" />-->
+        <attr name="retryVisibility" format="boolean" />
+<!--        <attr name="rightDrawable" format="reference" />-->
+<!--        <attr name="android:digits" />-->
+        <attr name="titleText" format="string" />
+        <attr name="subtitleText" format="string" />
+<!--        <attr name="android:textColor" format="color" />-->
+    </declare-styleable>
+
+    <declare-styleable name="DiscreteScrollView">
+        <attr format="enum" name="dsv_orientation">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

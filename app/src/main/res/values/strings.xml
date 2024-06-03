@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">Census</string>
+    <string name="Oops_No_Internet_Connection">Oops! No Internet Connection</string>
+    <string name="No_Internet_Connection">No Internet Connection</string>
+    <string name="Make_sure_your_wifi_or_celullar_data_is_turned_on_and_then_try_again">Make sure your Wifi or Celullar Data is turned on and then Try again!</string>
+    <string name="empty"></string>
+    <string name="internet_error">The internet connection appears to be offline.</string>
+
+</resources>

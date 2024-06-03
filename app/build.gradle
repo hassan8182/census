@@ -1,0 +1,192 @@
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
+apply plugin: "dagger.hilt.android.plugin"
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+
+    signingConfigs {
+        config {
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+        }
+    }
+    compileSdk 33
+
+    defaultConfig {
+        applicationId 'com.census'
+        minSdk 23
+        targetSdk 33
+        versionName "1.1"  // for app center
+//      versionName "1.14" // for play store
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = true
+            shrinkResources = false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources = false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs = ["-XXLanguage:-ProperCheckAnnotationsTargetInTypeUsePositions"]
+    }
+
+    packagingOptions {
+        pickFirst "**/libc++_shared.so"
+        pickFirst "**/libdlib.so"
+    }
+
+    flavorDimensions "default"
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${variant.applicationId}_V${variant.versionCode}_VN-${variant.versionName}_" + new Date().format('yyyy-MM-dd') + ".apk"
+        }
+    }
+    productFlavors {
+        production {
+            buildConfigField 'String', 'BASE_URL', APP_BASE_URL_PRODUCTION
+            buildConfigField 'String', 'API_KEY', API_KEY_PRODUCTION
+
+//            versionCode 14 // for play store
+            versionCode 1 // for app center
+        }
+        development {
+            buildConfigField 'String', 'BASE_URL', APP_BASE_URL_DEV
+            buildConfigField 'String', 'API_KEY', API_KEY_DEV
+            versionCode 1
+        }
+        staging {
+
+            buildConfigField 'String', 'BASE_URL', APP_BASE_URL_STAG
+            buildConfigField 'String', 'API_KEY', API_KEY_STAG
+
+            versionCode 1
+        }
+
+    }
+
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+
+    implementation Dependencies.splashScreen
+    implementation Dependencies.glideVersion
+    implementation Dependencies.navExtVersion
+    implementation Dependencies.kotlinCoreKtx
+    implementation Dependencies.vectorVersion
+    implementation Dependencies.appCompatVersion
+    implementation Dependencies.materialLibVersion
+    implementation Dependencies.liveDataKtxVersion
+    implementation Dependencies.lifeCycleExtVersion
+    implementation Dependencies.viewModelKtxVersion
+    implementation Dependencies.navFragmentExtVersion
+    implementation Dependencies.constraintLayoutVersion
+
+    kapt Dependencies.glideCompilerVersion
+
+    implementation Dependencies.coroutineCoreVersion
+    implementation Dependencies.coroutinesVersion
+
+    implementation Dependencies.hiltVersion
+    kapt Dependencies.hiltKaptVersion
+    kapt Dependencies.kaptHiltCompiler
+
+
+    implementation Dependencies.gsonVersion
+    implementation Dependencies.okhttpVersion
+    implementation Dependencies.retrofitVersion
+    implementation Dependencies.retrofitAdapter
+    implementation Dependencies.retrofitConverterVersion
+    implementation Dependencies.retrofitCoroutinesVersion
+    implementation Dependencies.okhttpInterceptorVersion
+
+    implementation Dependencies.timber
+    implementation Dependencies.lottie
+
+    implementation Dependencies.multiDexVersion
+
+    implementation Dependencies.jakewhartonRxbinding4
+    implementation Dependencies.jakewhartonRxbinding
+
+    implementation project(':countrypicker')
+
+
+    // Amazon S3
+    implementation "com.amazonaws:aws-android-sdk-s3:2.37.1"
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+
+     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
+
+
+//    // Firebase Dependency
+//    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+//
+//    implementation 'com.google.firebase:firebase-crashlytics'
+//    implementation 'com.google.firebase:firebase-analytics'
+//    implementation 'com.google.firebase:firebase-auth-ktx'
+//    implementation 'com.google.firebase:firebase-messaging'
+
+    // Room Database Dependency
+    implementation "androidx.room:room-runtime:2.4.0"
+    kapt "androidx.room:room-compiler:2.4.0"
+    implementation "androidx.room:room-rxjava3:2.4.0"
+    implementation "androidx.room:room-ktx:2.4.0"
+
+
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
+
+    // Permissions Handler
+    implementation 'com.github.tbruyelle:rxpermissions:0.12'
+    implementation("com.google.guava:guava:31.1-android")
+}

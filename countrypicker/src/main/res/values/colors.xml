@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="theme_color">#00c09a</color>
+    <color name="background">#f2f2f2</color>
+    <color name="black">#000000</color>
+    <color name="dark_grey">#78909C</color>
+    <color name="separator_color">#7378909c</color>
+</resources>

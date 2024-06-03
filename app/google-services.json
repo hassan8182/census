@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "892936099170",
+    "project_id": "racetofreedom-e9dd1",
+    "storage_bucket": "census-e9dd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892936099170:android:3f8179ad088edf810f083b",
+        "android_client_info": {
+          "package_name": "com.census"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892936099170-6na6msg28jv3mvsns8113cjvi3qtketi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.census",
+            "certificate_hash": "989ea356ac5c05ecdb71ac52e48686c3521383f7"
+          }
+        },
+        {
+          "client_id": "892936099170-l4b116omercam5e8fs4ctf7o8tmou814.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0XrUFfxblSGE6mjGSBj3xH_txOZGuEeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892936099170-l4b116omercam5e8fs4ctf7o8tmou814.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "892936099170-feaceg4r5et21ee0birmqdsdn7hb56um.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.test.censusapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

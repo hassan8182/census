@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#E5E5E5</color>
+    <color name="primary_color">#F1B20F</color>
+    <color name="app_yellow">#F1B20F</color>
+    <color name="app_blue">#003F5A</color>
+    <color name="grey_67">#676767</color>
+    <color name="grey_a9">#A9A9A9</color>
+    <color name="grey_fa">#FAFAFA</color>
+    <color name="grey_f2">#F2F2F2</color>
+    <color name="grey_40">#404040</color>
+    <color name="grey_e2">#E2E2E2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="snack_color">#cc2828</color>
+    <color name="red_color_cancel">#CC3300</color>
+    <color name="green_color_completed">#0E8420</color>
+    <color name="trans_black">#99000000</color>
+    <color name="divider_color">#c8c7cc</color>
+    <color name="blue_color_picker">#0066FF</color>
+    <color name="brown_color_picker">#AF593E</color>
+    <color name="green_color_picker">#01A368</color>
+    <color name="orange_color_picker">#FF861F</color>
+    <color name="red_color_picker">#ED0A3F</color>
+    <color name="red_orange_color_picker">#FF3F34</color>
+    <color name="colorOverlay">#78ffffff</color>
+
+    <integer-array name="story_bg_colors_picker">
+        <item>@color/app_blue</item>
+        <item>@color/app_yellow</item>
+        <item>@color/snack_color</item>
+        <item>@color/divider_color</item>
+        <item>@color/green_color_completed</item>
+        <item>@color/black</item>
+        <item>@color/white</item>
+    </integer-array>
+
+    <integer-array name="text_colors_picker">
+        <item>@color/blue_color_picker</item>
+        <item>@color/brown_color_picker</item>
+        <item>@color/green_color_picker</item>
+        <item>@color/orange_color_picker</item>
+        <item>@color/red_color_picker</item>
+        <item>@color/black</item>
+        <item>@color/red_orange_color_picker</item>
+        <item>@color/white</item>
+    </integer-array>
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/country_flag"
+        android:layout_width="16.9dp"
+        android:layout_height="12.4dp"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/flag" />
+
+    <TextView
+        android:id="@+id/country_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5.6dp"
+        android:layout_marginEnd="5.6dp"
+        android:layout_toEndOf="@+id/country_flag"
+        android:layout_toStartOf="@+id/country_code"
+        android:fontFamily="@font/product_sans_regular"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/small_text_size" />
+
+    <TextView
+        android:id="@+id/country_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/product_sans_regular"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/small_text_size" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_below="@id/country_title"
+        android:layout_marginTop="@dimen/_5dp"
+        android:background="@color/separator_color" />
+</RelativeLayout>
