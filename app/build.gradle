@@ -167,6 +167,9 @@ dependencies {
      coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'org.osmdroid:osmdroid-android:6.1.8'
 
 
 //    // Firebase Dependency

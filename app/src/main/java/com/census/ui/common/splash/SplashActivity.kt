@@ -11,6 +11,7 @@ import com.census.databinding.ActivitySplashBinding
 import com.census.ui.auth.LoginActivity
 import com.census.ui.base.BaseActivity
 import com.census.ui.blocks.BlockSelectionActivity
+import com.census.ui.blockverification.BlockVerificationActivity
 import com.census.ui.dashboard.DashboardActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -91,7 +92,7 @@ class SplashActivity :
     }
 
     private fun onAnimationCompleted() {
-        startActivity(DashboardActivity.newIntent(this))
+        startActivity(BlockVerificationActivity.newIntent(this))
         finish()
     }
 

@@ -4,13 +4,14 @@ package com.census.ui.dashboard
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.census.data.local.db.DatabaseRepository
-import com.census.data.request.LoginRequest
+import com.census.data.local.db.tables.syncdata.SyncData
+
+
 import com.census.data.response.census.Data
-import com.census.data.response.census.User
+import com.census.data.response.census.SyncDataResponse
 import com.census.network.ApiState
 import com.census.ui.base.BaseActivity
 import com.census.ui.base.BaseViewModel
-import com.census.ui.repository.AuthRepository
 import com.census.ui.repository.HomeRepository
 import com.census.utils.SingleLiveEvent
 
@@ -28,36 +29,13 @@ class DashboardActivityViewModel @Inject constructor() : BaseViewModel() {
     lateinit var repository: HomeRepository
 
     @Inject
-    lateinit var userRepository: DatabaseRepository
-
-
-
-
-
+    lateinit var databaseRepository: DatabaseRepository
 
 
     val event = SingleLiveEvent<@DashboardActivityClickEvents Int>()
 
-/*    fun test(user: Users){
-        viewModelScope.launch {
-            userRepository.insert(user)
-        }
-
-    }
-    fun addQuestion(question:Question){
-        viewModelScope.launch {
-            userRepository.insertQuestion(question)
-        }
-    }
-    fun getQuestions(){
-        viewModelScope.launch {
-            var question:List<Question>
-            question=userRepository.getQuestions()
-            Log.d("show_question","${question}")
-        }
-        }*/
-    fun onSyncClick(){
-        event.value=DashboardActivity.ON_SYNC_CLICK
+    fun onSyncClick() {
+        event.value = DashboardActivity.ON_SYNC_CLICK
     }
 
     fun onBackPress() {
@@ -66,12 +44,12 @@ class DashboardActivityViewModel @Inject constructor() : BaseViewModel() {
 
     fun getSyncData(
 
-        url:String,
-        onSuccess: (message: String?,synData: Data?) -> Unit,
+        url: String,
+        onSuccess: (message: String?, synData: Data?) -> Unit,
         onFailure: (message: String?) -> Unit
     ) {
         viewModelScope.launch {
-            repository.getSyncData(url).collect {
+            repository.getSyncData(url).collect { it ->
                 when (it) {
                     is ApiState.Loading -> {
                         baseEvent.value = BaseActivity.SHOW_LOADER
@@ -84,37 +62,67 @@ class DashboardActivityViewModel @Inject constructor() : BaseViewModel() {
 
                     is ApiState.Success -> {
                         baseEvent.value = BaseActivity.HIDE_LOADER
-                        if (it.response!=null){
-                            onSuccess.invoke("success",it.response.syncData)
+                        if (it.response != null) {
+                            onSuccess.invoke("success", it.response.syncData)
+
+                            it.response.syncData?.let {
+                                databaseRepository.insertSyncData(
+                                    SyncData(
+                                        id = it.id,
+                                        districtCode = it.districtCode,
+                                        districtName = it.districtName,
+                                        tehsilCode = it.tehsilCode,
+                                        tehsilName = it.tehsilName,
+                                        cvCode = it.cvCode,
+                                        urbanity = it.urbanity,
+                                        cvName = it.cvName,
+                                        arTehsil = it.arTehsil,
+                                        blockId = it.blockId,
+                                        uniqueId = it.uniqueId,
+                                        univ2012 = it.univ2012,
+                                        univ2022 = it.univ2022,
+                                        fieldExecutive = it.fieldExecutive,
+                                        execId = it.execId,
+                                        fieldSup = it.fieldSup,
+                                        supId = it.supId,
+                                        iqcSup = it.iqcSup,
+                                        iqcsupId = it.iqcsupId,
+                                        fieldAuditor = it.fieldAuditor,
+                                        auditorId = it.auditorId,
+                                        iqcAuditor = it.iqcAuditor,
+                                        iqcauditorId = it.iqcauditorId,
+                                        assigned = it.assigned,
+                                        flagged = it.flagged,
+                                        resolved = it.resolved,
+                                        csvFileName = it.csvFileName,
+                                        arGeoFileName = it.arGeoFileName,
+                                        fkMap = it.fkMap,
+                                        status = it.status,
+                                        createdAt = it.createdAt,
+                                        updatedAt = it.updatedAt,
+                                        fileName = it.fileName,
+                                        blockIdDuplicate = it.blockIdAlt,
+                                        json = it.json,
+                                        active = it.active,
+                                        city = it.city
+                                    )
+                                )
+                            }
+
                         }
 
-//                        if (it.response != null && it.response.message!=null) {
-//                            Log.d("user","${it.response.user?.name}")
-//                            onSuccess.invoke(it.response.message,it.response.token,it.response.user)
-//                        } else {
-//                            Log.d("error","${it.response?.errors}")
-//
-//                            onFailure.invoke(
-//                                it.response?.errors?.error?.get(0).toString()
-//                            )
-//                        }
+
                     }
 
                     is ApiState.Failure -> {
                         baseEvent.value = BaseActivity.HIDE_LOADER
-                        Log.d("message",it.msg.toString())
+                        Log.d("message", it.msg.toString())
                         onFailure.invoke(it.msg)
                     }
                 }
             }
         }
     }
-
-
-
-
-
-
 
 
 }

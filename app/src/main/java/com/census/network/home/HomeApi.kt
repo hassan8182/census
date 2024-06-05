@@ -2,7 +2,9 @@ package com.census.network.home
 
 import com.census.data.request.*
 import com.census.data.response.ResponseData
-import com.census.data.response.census.SyncData
+import com.census.data.response.census.LoginResponse
+import com.census.data.response.census.SyncDataResponse
+
 import com.census.data.response.industry.CategoryApiResponse
 import com.census.network.ApiEndPoints
 import retrofit2.Response
@@ -20,7 +22,7 @@ interface HomeApi {
     @GET
     suspend fun getSyncData(
         @Url url:String
-    ): Response<SyncData>
+    ): Response<SyncDataResponse>
 
 
 }

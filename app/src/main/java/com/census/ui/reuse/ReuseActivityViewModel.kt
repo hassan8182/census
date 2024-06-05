@@ -1,7 +1,6 @@
 package com.census.ui.reuse
 
 
-import com.census.data.local.db.DatabaseRepository
 import com.census.ui.base.BaseViewModel
 import com.census.ui.repository.AuthRepository
 import com.census.utils.SingleLiveEvent
@@ -17,8 +16,6 @@ class ReuseActivityViewModel @Inject constructor() : BaseViewModel() {
     @Inject
     lateinit var repository: AuthRepository
 
-    @Inject
-    lateinit var userRepository: DatabaseRepository
 
 
 

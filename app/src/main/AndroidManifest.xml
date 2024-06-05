@@ -75,6 +75,10 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_map_api_key"
+                />
         </provider>
 
         <meta-data
@@ -105,6 +109,10 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.census.ui.dashboard.DashboardActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.census.ui.blockverification.BlockVerificationActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity

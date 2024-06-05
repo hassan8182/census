@@ -118,28 +118,6 @@ object AppModule {
     }
 
 
-    @Provides
-    @Singleton
-    fun provideAppDatabase(
-        @DatabaseInfo dbName: String?,
-        @ApplicationContext context: Context?
-    ): AppDatabase {
-        return Room.databaseBuilder(context!!, AppDatabase::class.java, dbName!!)
-//            .fallbackToDestructiveMigration()
-            .allowMainThreadQueries()
-            .build()
-    }
 
-    @Provides
-    @DatabaseInfo
-    fun provideDatabaseName(): String {
-        return "racetofreedomDb"
-    }
-
-    @Provides
-    @Singleton
-    fun provideDbHelper(appDbHelper: AppDbHelper): DbHelper {
-        return appDbHelper
-    }
 
 }

@@ -1,7 +1,7 @@
 package com.census.ui.blocks
 
 
-import com.census.data.local.db.DatabaseRepository
+
 import com.census.ui.base.BaseViewModel
 import com.census.ui.repository.AuthRepository
 import com.census.utils.SingleLiveEvent
@@ -17,8 +17,6 @@ class BlockSelectionActivityViewModel @Inject constructor() : BaseViewModel() {
     @Inject
     lateinit var repository: AuthRepository
 
-    @Inject
-    lateinit var userRepository: DatabaseRepository
 
 
 

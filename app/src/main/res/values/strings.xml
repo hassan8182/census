@@ -8,4 +8,5 @@
     <string name="internet_error">The internet connection appears to be offline.</string>
     <string name="nav_close">Close Navigation Drawer</string>
     <string name="nav_open">Open</string>
+    <string name="google_map_api_key">AIzaSyD2FhXXJzKpogaCvT9cCJJm_17xsp3cBmM</string>
 </resources>
