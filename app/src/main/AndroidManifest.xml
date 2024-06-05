@@ -107,6 +107,11 @@
             android:name="com.census.ui.dashboard.DashboardActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.census.ui.blocks.BlockSelectionActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
 
 
     </application>

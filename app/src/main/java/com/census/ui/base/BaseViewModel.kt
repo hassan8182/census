@@ -3,7 +3,7 @@ package com.census.ui.base
 import androidx.lifecycle.ViewModel
 import com.census.data.local.prefs.PreferencesHelper
 import com.census.data.managers.DataManager
-import com.census.data.response.auth.User
+import com.census.data.response.census.User
 import com.census.utils.Constants
 import com.census.utils.SingleLiveEvent
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -51,10 +51,10 @@ open class BaseViewModel : ViewModel() {
 
     open fun getLoggedInUserType(user: User): PreferencesHelper.LoginType? {
 
-        if (user.role.isNullOrEmpty()) return null
-        if (user.role.equals(Constants.LOGIN_USER_TYPE_ADVISOR)) return PreferencesHelper.LoginType.ADVISOR
-        if (user.role.equals(Constants.LOGIN_USER_TYPE_TRAINEE)) return PreferencesHelper.LoginType.TRAINEE
-        if (user.role.equals(Constants.LOGIN_USER_TYPE_SUPER_ADMIN)) return PreferencesHelper.LoginType.SUPER_ADMIN
+//        if (user.role.isNullOrEmpty()) return null
+//        if (user.role.equals(Constants.LOGIN_USER_TYPE_ADVISOR)) return PreferencesHelper.LoginType.ADVISOR
+//        if (user.role.equals(Constants.LOGIN_USER_TYPE_TRAINEE)) return PreferencesHelper.LoginType.TRAINEE
+//        if (user.role.equals(Constants.LOGIN_USER_TYPE_SUPER_ADMIN)) return PreferencesHelper.LoginType.SUPER_ADMIN
 
         return null
 

@@ -41,10 +41,19 @@ class PreferencesHelperImpl @Inject constructor(
         ).apply()
         mPrefs.edit().putInt(LOGIN_TYPE, login.ordinal).apply()
     }
+    override fun saveUserItem(userItemString: String) {
+        mPrefs.edit().putString(USER_ITEM, userItemString).apply()
+    }
+    override fun getUserItem(): String {
+        return mPrefs.getString(USER_ITEM, "").toString()
+    }
+
 
 
     companion object {
         private const val LOGIN_TYPE = "LOGIN_TYPE"
         private const val LOGIN_USER_TYPE = "LOGIN_USER_TYPE"
+        private const val USER_ITEM = "USER_ITEM"
+
     }
 }

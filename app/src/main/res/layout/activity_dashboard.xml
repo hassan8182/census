@@ -14,8 +14,7 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:fitsSystemWindows="true">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -285,6 +284,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/cvStaus"
 
                 />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnSync"
+                android:layout_width="wrap_content"
+                rapidOnClick="@{()->viewModel.onSyncClick()}"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:elevation="10dp"
+                android:src="@drawable/ic_sync"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

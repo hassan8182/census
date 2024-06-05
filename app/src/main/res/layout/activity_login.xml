@@ -46,23 +46,22 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPhoneNumber"
+                android:id="@+id/tilUserName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="120dp"
-                android:hint="Phone Number"
+                android:hint="Enter User Name"
                 app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@id/ivLogo"
-                app:prefixText="+92"
                 app:shapeAppearanceOverlay="@style/roundedCornerEditText">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPhoneNumber"
+                    android:id="@+id/etUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:maxLength="10">
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -76,9 +75,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
-                android:hint="Password"
+                android:hint="Enter Password"
                 app:endIconMode="password_toggle"
-                app:layout_constraintTop_toBottomOf="@id/tilPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@id/tilUserName"
                 app:shapeAppearanceOverlay="@style/roundedCornerEditText"
                 app:startIconDrawable="@drawable/ic_lock">
 

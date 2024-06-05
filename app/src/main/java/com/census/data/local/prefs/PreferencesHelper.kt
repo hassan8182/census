@@ -18,5 +18,7 @@ interface PreferencesHelper {
 
     fun getLoginType(): LoginType
     fun setLoginType(login: LoginType)
+    fun saveUserItem(userItemString: String)
+    fun getUserItem(): String
 
 }

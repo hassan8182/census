@@ -4,6 +4,7 @@ import com.census.BuildConfig
 import com.census.data.request.*
 import com.census.data.response.ResponseData
 import com.census.data.response.auth.AuthApiResponse
+import com.census.data.response.census.LoginResponse
 import com.census.network.ApiEndPoints
 import com.census.ui.base.api.BaseApiResponse
 import retrofit2.Response
@@ -13,7 +14,7 @@ import retrofit2.http.POST
 
 interface AuthApi {
 
-    @POST(ApiEndPoints.LOGIN)
+   /* @POST(ApiEndPoints.LOGIN)
     suspend fun login(
         @Body request: LoginRequest,
         @Header("apikey") api_key: String
@@ -26,7 +27,12 @@ interface AuthApi {
         @Header("b-datetime") bts: String,
         @Header("b-authorization") authorizationKey: String,
         @Header("appVersion") appVersion: String = BuildConfig.VERSION_NAME
-    ): Response<BaseApiResponse>
+    ): Response<BaseApiResponse>*/
+
+    @POST(ApiEndPoints.LOGIN)
+    suspend fun login(
+        @Body request: LoginRequest
+    ): Response<LoginResponse>
 
 
 }

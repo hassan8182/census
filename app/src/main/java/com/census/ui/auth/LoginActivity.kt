@@ -3,12 +3,18 @@ import android.content.Context
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.viewModels
 import com.census.R
 import com.census.BR
+import com.census.data.request.LoginRequest
 import com.census.databinding.ActivityLoginBinding
 import com.census.ui.base.BaseActivity
 import com.census.ui.dashboard.DashboardActivity
+import com.census.utils.CommonUtils
+import com.census.utils.NetworkUtils
+import com.census.utils.showToast
+import com.google.gson.Gson
 
 
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,7 +72,7 @@ class LoginActivity :
     /////////////////////////////////////////////////////////
 
     private fun addListener() {
-        bindings.etPhoneNumber.addTextChangedListener(object : TextWatcher {
+        bindings.etUserName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(
                 s: CharSequence?, start: Int,
@@ -96,24 +102,39 @@ class LoginActivity :
     }
     private fun onLogInClick() {
 
-        val phoneNumber = bindings.etPhoneNumber.text.toString()
+        val userName = bindings.etUserName.text.toString()
         val password = bindings.etPassword.text.toString()
 
 
-        if (phoneNumber.isEmpty()) {
+        if (userName.isEmpty()) {
             viewModel.isErrorTextShowing.value = true
-            bindings.tvErrorText.text = "Please enter your phone number."
-        } else if (bindings.etPhoneNumber.text?.get(0).toString() != "3" || bindings.etPhoneNumber.text?.length != 10) {
-            viewModel.isErrorTextShowing.value = true
-            bindings.tvErrorText.text = "Invalid phone number."
-        } else if (password.isEmpty()) {
+            bindings.tvErrorText.text = "Please enter user name."
+        }  else if (password.isEmpty()) {
             viewModel.isErrorTextShowing.value = true
             bindings.tvErrorText.text = "Please enter your password."
         } else {
-            startActivity(DashboardActivity.newIntent(this))
+            var loginRequest=LoginRequest()
+            loginRequest.userName=userName
+            loginRequest.password=password
+            callLoginApi(loginRequest)
         }
+    }
+
+    private fun callLoginApi(request: LoginRequest) {
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            CommonUtils.showToast(this, getString(R.string.internet_error))
+            return
+        }
+        viewModel.login(request, onSuccess = { message,user->
+            Log.d("userDetail","${user?.id}")
+            viewModel.dataManager.getPreferencesHelper().saveUserItem(Gson().toJson(user))
+            startActivity(DashboardActivity.newIntent(this))
+            finish()
 
 
+        }) { message ->
+            showToast("Login Failed")
+        }
     }
 
 

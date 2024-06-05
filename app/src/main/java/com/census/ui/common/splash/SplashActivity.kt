@@ -10,6 +10,8 @@ import com.census.R
 import com.census.databinding.ActivitySplashBinding
 import com.census.ui.auth.LoginActivity
 import com.census.ui.base.BaseActivity
+import com.census.ui.blocks.BlockSelectionActivity
+import com.census.ui.dashboard.DashboardActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -73,7 +75,7 @@ class SplashActivity :
 //        setupAnimationListener()
     }
 
-/*    private fun setupAnimationListener() {
+    private fun setupAnimationListener() {
 
         bindings.animationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator) = Unit
@@ -86,10 +88,11 @@ class SplashActivity :
             override fun onAnimationStart(animation: Animator) = Unit
         })
 
-    }*/
+    }
 
     private fun onAnimationCompleted() {
-        startActivity(LoginActivity.newIntent(this))
+        startActivity(DashboardActivity.newIntent(this))
+        finish()
     }
 
 

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/block_active"
+        android:title="Active"/>
+    <item
+        android:id="@+id/block_complete"
+        android:title="Complete"/>
+    <item
+        android:id="@+id/block_cancel"
+        android:title="Cancel"/>
+</menu>

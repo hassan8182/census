@@ -25,4 +25,10 @@ class HomeRepository @Inject constructor(
             BuildConfig.API_KEY, ""
         )
     }
+
+    fun getSyncData(url: String) = baseApiResultHandler {
+        homeApi.getSyncData(
+            url
+        )
+    }
 }

@@ -2,6 +2,7 @@ package com.census.ui.repository
 
 import com.census.BuildConfig
 import com.census.data.managers.DataManager
+import com.census.data.request.LoginRequest
 import com.census.data.request.SignUpRequest
 import com.census.network.auth.AuthApi
 import com.census.ui.base.api.BaseApiHelper
@@ -22,7 +23,7 @@ class AuthRepository @Inject constructor(
     lateinit var dataManager: DataManager
 
 
-    fun callSignupApi(request: SignUpRequest) = baseApiResultHandler {
+/*    fun callSignupApi(request: SignUpRequest) = baseApiResultHandler {
         //        "2022-12-07 12:13:44"
         val date = CommonUtils.getCurrentDateTimeForApiRequest()
 //        val authorizationKey = CommonUtils.getAuthorizationToken(
@@ -32,6 +33,11 @@ class AuthRepository @Inject constructor(
 //            request.phone_number!!
 //        )
         authApi.signup(request, BuildConfig.API_KEY, date, "")
+    }*/
+    fun callLoginApi(request: LoginRequest) = baseApiResultHandler {
+        authApi.login(request)
     }
+
+
 
 }
