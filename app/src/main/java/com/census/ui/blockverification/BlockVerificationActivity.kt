@@ -43,6 +43,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polygon
+import org.osmdroid.views.overlay.Polyline
 
 
 import javax.inject.Inject
@@ -58,6 +59,8 @@ class BlockVerificationActivity :
     private lateinit var locationClient: FusedLocationProviderClient
     private var priority: Int? = null
     private var location: String = ""
+    private val polygonPointsList = mutableListOf<List<GeoPoint>>()
+
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -86,6 +89,7 @@ class BlockVerificationActivity :
 
         const val ON_BACK_PRESS = 0
         const val ON_CAPTURE_LOCATION_CLICK = 1
+        const val ON_PROCEED_CLICK=2
 
 
         fun newIntent(
@@ -128,6 +132,9 @@ class BlockVerificationActivity :
 
                 ON_CAPTURE_LOCATION_CLICK -> {
                     locationPermission()
+
+                }
+                ON_PROCEED_CLICK->{
 
                 }
             }
@@ -185,6 +192,8 @@ class BlockVerificationActivity :
 
         var polygonBoundingBox: BoundingBox? = null
         val geometryFactory = GeometryFactory()
+        polygonPointsList.clear() // Clear the list before adding new points
+
 
 
         for (i in 0 until features.length()) {
@@ -209,6 +218,7 @@ class BlockVerificationActivity :
 
                     osmdroidPolygon.points = geoPoints
                     mapView.overlays.add(osmdroidPolygon)
+                    polygonPointsList.add(geoPoints)
 
                     // Create JTS polygon
                     val linearRing: LinearRing =
@@ -230,6 +240,59 @@ class BlockVerificationActivity :
         }
     }
 
+    /////////////////// map validations /////////////////
+    private fun closestPointOnSegment(p: GeoPoint, a: GeoPoint, b: GeoPoint): GeoPoint {
+        val ap = doubleArrayOf(p.latitude - a.latitude, p.longitude - a.longitude)
+        val ab = doubleArrayOf(b.latitude - a.latitude, b.longitude - a.longitude)
+        val ab2 = ab[0] * ab[0] + ab[1] * ab[1]
+        val ap_ab = ap[0] * ab[0] + ap[1] * ab[1]
+        val t = ap_ab / ab2
+
+        return when {
+            t < 0.0 -> a
+            t > 1.0 -> b
+            else -> GeoPoint(a.latitude + ab[0] * t, a.longitude + ab[1] * t)
+        }
+    }
+
+    private fun findClosestPointOnPolygon( location: GeoPoint):Double? {
+        var closestPoint: GeoPoint? = null
+        var minDistance = Double.MAX_VALUE
+
+        for (polygonPoints in polygonPointsList) {
+            for (i in 0 until polygonPoints.size) {
+                val startPoint = polygonPoints[i]
+                val endPoint = polygonPoints[(i + 1) % polygonPoints.size]
+                val candidatePoint = closestPointOnSegment(location, startPoint, endPoint)
+                val distance = location.distanceToAsDouble(candidatePoint)
+
+                if (distance < minDistance) {
+                    minDistance = distance
+                    closestPoint = candidatePoint
+                }
+            }
+        }
+        var distance:Double?=null
+
+        closestPoint?.let {
+           distance= drawLine(location, it)
+        }
+        return distance
+    }
+
+    private fun drawLine( start: GeoPoint, end: GeoPoint):Double {
+        val line = Polyline(mapView)
+        line.color=ContextCompat.getColor(this,R.color.red_color_cancel)
+        line.addPoint(start)
+        line.addPoint(end)
+        mapView.overlays.add(line)
+        mapView.invalidate()
+        val distance = start.distanceToAsDouble(end)
+        return distance
+    }
+
+
+
     private fun isPointInsidePolygon(point: GeoPoint, polygon: JTSPolygon): Boolean {
         val geometryFactory = GeometryFactory()
         val jtsPoint: JTSPoint =
@@ -237,18 +300,7 @@ class BlockVerificationActivity :
         return polygon.contains(jtsPoint)
     }
 
-    fun isPointWithinDistanceOfPolygonBoundary(
-        point: GeoPoint,
-        polygon: JTSPolygon,
-        maxDistance: Double
-    ): Boolean {
-        val geometryFactory = GeometryFactory()
-        val jtsPoint: JTSPoint =
-            geometryFactory.createPoint(Coordinate(point.longitude, point.latitude))
-        val distanceOp = DistanceOp(jtsPoint, polygon)
-        val distance = distanceOp.distance()
-        return distance <= maxDistance
-    }
+
 
 
     private fun showMapForPakistan() {
@@ -276,9 +328,19 @@ class BlockVerificationActivity :
                     currentLocation?.let {
 //                        focusOnStartPosition(it.latitude, it.longitude)
 //                        animateToLocation(GeoPoint(it.latitude,it.longitude))
-                        addCurrentLocationMarker(GeoPoint(it.latitude, it.longitude))
-                        animateToLocation(GeoPoint(it.latitude, it.longitude))
-                        confirmIfInsidePolygon(GeoPoint(it.latitude, it.longitude))
+//                        val geoPoint=GeoPoint(it.latitude,it.longitude)
+                        val geoPoint=GeoPoint(31.483267463188803,74.31566681269855)//outside 20 meters
+
+//                        val geoPoint=GeoPoint(31.48160866506337,74.3129336954781)
+
+
+                        addCurrentLocationMarker(geoPoint)
+//                        animateToLocation(GeoPoint(it.latitude, it.longitude))
+                        confirmIfInsidePolygon(geoPoint)
+//                        findClosestPointOnPolygon(GeoPoint(GeoPoint(it.latitude,it.longitude)))
+                        animateToLocation(geoPoint)
+//                        val isInsidePolygon:Boolean?=isPointInsidePolygon(GeoPoint(GeoPoint(it.latitude,it.longitude)),jtsPolygon!!)
+
 
                     }
                     Log.d(
@@ -301,30 +363,28 @@ class BlockVerificationActivity :
         if (isInsidePolygon == true) {
             bindings.tvErrorText.text = "you are inside map"
             bindings.tvErrorText.setTextColor(ContextCompat.getColor(this,R.color.completed))
+            viewModel.isInsideMap.value=true
 
         } else {
-            val isWithinDistanceOfPolygon: Boolean? = jtsPolygon?.let { it1 ->
-                isPointWithinDistanceOfPolygonBoundary(geoPoint, it1, 20.0)
+
+            var distance:Double?=null
+               distance= findClosestPointOnPolygon(geoPoint)
+            if (distance!=null && distance<=20.0){
+                bindings.tvErrorText.text = "you are barely inside map"
+                bindings.tvErrorText.setTextColor(ContextCompat.getColor(this,R.color.completed))
+                viewModel.isInsideMap.value=true
+                showToast(distance.toString())
             }
-            if (isWithinDistanceOfPolygon == true) {
-                bindings.tvErrorText.text = "You are inside the map"
-                viewModel.isErrorTextShowing.value == true
-                bindings.tvErrorText.setTextColor(
-                    ContextCompat.getColor(
-                        this@BlockVerificationActivity,
-                        R.color.completed
-                    )
-                )
-            } else {
+            else if (distance!=null && distance>20.0){
+                viewModel.isInsideMap.value=false
                 bindings.tvErrorText.text = "You are outside the map"
-                viewModel.isErrorTextShowing.value == true
-                bindings.tvErrorText.setTextColor(
-                    ContextCompat.getColor(
-                        this@BlockVerificationActivity,
-                        R.color.red_color_cancel
-                    )
-                )
+                bindings.tvErrorText.setTextColor(ContextCompat.getColor(this,R.color.red_color_cancel))
             }
+            else{
+                showToast("Please try again!")
+            }
+
+
         }
 
         Log.d("resultp", "${isInsidePolygon.toString()}")
@@ -347,7 +407,7 @@ class BlockVerificationActivity :
     private fun animateToLocation(location: GeoPoint) {
         val mapController = mapView.controller
         val currentZoomLevel = mapView.zoomLevelDouble
-        mapController.animateTo(location, currentZoomLevel , 800L)
+        mapController.animateTo(location, 20.0 , 800L)
         hideLoading()
     }
 

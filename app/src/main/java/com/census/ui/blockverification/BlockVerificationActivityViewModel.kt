@@ -19,7 +19,7 @@ class BlockVerificationActivityViewModel @Inject constructor() : BaseViewModel()
 
 
     val event = SingleLiveEvent<@BlockVerificationActivityClickEvents Int>()
-    val isErrorTextShowing = MutableLiveData(false)
+    val isInsideMap = MutableLiveData(false)
 
 
     fun onCaptureLocationClick(){
@@ -28,6 +28,9 @@ class BlockVerificationActivityViewModel @Inject constructor() : BaseViewModel()
 
     fun onBackPress() {
         event.value = BlockVerificationActivity.ON_BACK_PRESS
+    }
+    fun onProceedClick(){
+        event.value=BlockVerificationActivity.ON_PROCEED_CLICK
     }
 
 
