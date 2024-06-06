@@ -17,32 +17,9 @@ class ReuseActivityViewModel @Inject constructor() : BaseViewModel() {
     lateinit var repository: AuthRepository
 
 
-
-
-
-
-
-
     val event = SingleLiveEvent<@ReuseActivityClickEvents Int>()
 
-/*    fun test(user: Users){
-        viewModelScope.launch {
-            userRepository.insert(user)
-        }
 
-    }
-    fun addQuestion(question:Question){
-        viewModelScope.launch {
-            userRepository.insertQuestion(question)
-        }
-    }
-    fun getQuestions(){
-        viewModelScope.launch {
-            var question:List<Question>
-            question=userRepository.getQuestions()
-            Log.d("show_question","${question}")
-        }
-        }*/
     fun onClick(){
         event.value=ReuseActivity.ON_CLICK_CLICK
     }
