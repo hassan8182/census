@@ -49,164 +49,9 @@
                 app:layout_constraintTop_toTopOf="@id/ivBack" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/clTopNav"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ivBlockStatus"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/white"
-                    android:elevation="5dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_user_profile"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/imageCircleShape" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvProvince"
-                    style="@style/appTextBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Province: "
-                    app:layout_constraintStart_toEndOf="@+id/ivBlockStatus"
-                    app:layout_constraintTop_toTopOf="@id/ivBlockStatus" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvProvinceValue"
-                    style="@style/appText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Punjab"
-                    app:layout_constraintBottom_toBottomOf="@id/tvProvince"
-                    app:layout_constraintStart_toEndOf="@+id/tvProvince"
-                    app:layout_constraintTop_toTopOf="@id/tvProvince" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDistrict"
-                    style="@style/appTextBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="District: "
-                    app:layout_constraintStart_toStartOf="@id/tvProvince"
-                    app:layout_constraintTop_toBottomOf="@id/tvProvince" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDistrictValue"
-                    style="@style/appText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Lahore"
-                    app:layout_constraintBottom_toBottomOf="@id/tvDistrict"
-                    app:layout_constraintStart_toEndOf="@+id/tvDistrict"
-                    app:layout_constraintTop_toTopOf="@id/tvDistrict" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTehsil"
-                    style="@style/appTextBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Tehsil: "
-                    app:layout_constraintStart_toStartOf="@id/tvDistrict"
-                    app:layout_constraintTop_toBottomOf="@id/tvDistrict" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTehsilValue"
-                    style="@style/appText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Lahore"
-                    app:layout_constraintBottom_toBottomOf="@id/tvTehsil"
-                    app:layout_constraintStart_toEndOf="@+id/tvTehsil"
-                    app:layout_constraintTop_toTopOf="@id/tvTehsil" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvBlockId"
-                    style="@style/appTextBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Block Id: "
-                    app:layout_constraintStart_toStartOf="@id/tvTehsil"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTehsil" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvBlockIdValue"
-                    style="@style/appText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="2"
-                    app:layout_constraintBottom_toBottomOf="@id/tvBlockId"
-                    app:layout_constraintStart_toEndOf="@+id/tvBlockId"
-                    app:layout_constraintTop_toTopOf="@id/tvBlockId" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvBlockStatus"
-                    style="@style/appText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Complete"
-                    app:layout_constraintBottom_toBottomOf="@id/ivDots"
-                    app:layout_constraintEnd_toStartOf="@+id/ivDots"
-                    app:layout_constraintTop_toTopOf="@id/ivDots" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivDots"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_vertical_dots"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!--<androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBlockSelection"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -217,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clTopNav" />-->
+            app:layout_constraintTop_toBottomOf="@id/clTopNav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

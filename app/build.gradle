@@ -169,7 +169,9 @@ dependencies {
     implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
-    implementation 'org.osmdroid:osmdroid-android:6.1.8'
+    implementation 'org.osmdroid:osmdroid-android:6.1.14'
+    implementation 'org.locationtech.jts:jts-core:1.18.0'
+
 
 
 //    // Firebase Dependency

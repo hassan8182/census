@@ -92,7 +92,7 @@ class SplashActivity :
     }
 
     private fun onAnimationCompleted() {
-        startActivity(BlockVerificationActivity.newIntent(this))
+        startActivity(DashboardActivity.newIntent(this))
         finish()
     }
 

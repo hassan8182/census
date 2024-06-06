@@ -2,6 +2,7 @@ package com.census.ui.blocks
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -9,15 +10,20 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.census.ui.base.BaseActivity
 import com.census.BR
 import com.census.CensusApp
 import com.census.R
+import com.census.data.local.db.DatabaseRepository
 import com.census.databinding.ActivityBlockSelectionBinding
 import com.census.databinding.ActivityDashboardBinding
 import com.census.ui.blocks.adapter.BlockSelectionAdapter
+import com.census.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -26,6 +32,9 @@ class BlockSelectionActivity :
     private lateinit var adapterBlockSelection: BlockSelectionAdapter
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
+
+    @Inject
+    lateinit var databaseRepository: DatabaseRepository
 
 
     companion object {
@@ -69,15 +78,22 @@ class BlockSelectionActivity :
             }
         }
 
-//        setRvBlockSelection()
+        setRvBlockSelection()
         updateStatusBar()
         setStatusBarTextColor(false)
+        observeList()
+
 
     }
 
+    private fun observeList(){
+        viewModel.syncData.observe(this) { syncData ->
+            adapterBlockSelection.syncDataList = syncData
+            adapterBlockSelection.notifyDataSetChanged()
+        }
+    }
 
-
-/*    private fun setRvBlockSelection() {
+    private fun setRvBlockSelection() {
 
         adapterBlockSelection = BlockSelectionAdapter()
         adapterBlockSelection.setListener(object : BlockSelectionAdapter.BasicInterface {
@@ -85,11 +101,50 @@ class BlockSelectionActivity :
 
             }
 
+            override fun onInActiveClick(id: Int, active: Int) {
+                showLoading()
+                lifecycleScope.launch {
+                    databaseRepository.updateSyncDataActive(id, active)
+                    hideLoading()
+                    showToast("Block Inactive")
+                }
+            }
+
+            override fun onActiveClick(id: Int, active: Int) {
+                showLoading()
+                lifecycleScope.launch {
+                    databaseRepository.updateSyncDataActive(id,active)
+                    hideLoading()
+                    showToast("Block Active")
+                }
+
+            }
+
+            override fun onCompleteClick(id: Int, active: Int) {
+                showLoading()
+                lifecycleScope.launch {
+                    databaseRepository.updateSyncDataActive(id,active)
+                    hideLoading()
+                    showToast("Block is completed")
+                }
+
+            }
+
+            override fun onCancelClick(id: Int, active: Int) {
+                showLoading()
+                lifecycleScope.launch {
+                    databaseRepository.updateSyncDataActive(id,active)
+                    hideLoading()
+                    showToast("Block cancelled")
+                }
+
+            }
+
         })
         bindings.rvBlockSelection.adapter = adapterBlockSelection
         adapterBlockSelection.notifyDataSetChanged()
 
-    }*/
+    }
 
 
 }

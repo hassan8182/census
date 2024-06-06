@@ -16,6 +16,7 @@ import com.census.R
 import com.census.data.response.census.User
 import com.census.databinding.ActivityDashboardBinding
 import com.census.ui.blocks.BlockSelectionActivity
+import com.census.ui.blockverification.BlockVerificationActivity
 import com.census.utils.CommonUtils
 import com.census.utils.NetworkUtils
 import com.census.utils.showToast
@@ -90,6 +91,8 @@ class DashboardActivity :
             when (it.itemId) {
                 R.id.nav_dashboard -> showToast("Dashboard Clicked")
                 R.id.nav_blocks_selection -> startActivity(BlockSelectionActivity.newIntent(this))
+                R.id.nav_new_shop->startActivity(BlockVerificationActivity.newIntent(this))
+                R.id.nav_sync_server->syncData()
 
             }
             true
@@ -109,6 +112,7 @@ class DashboardActivity :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (drawerToggle.onOptionsItemSelected(item)) {
+
             true
         }
         return super.onOptionsItemSelected(item)

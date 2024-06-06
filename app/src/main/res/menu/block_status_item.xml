@@ -1,5 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/block_inactive"
+        android:title="Inactive"/>
+    <item
         android:id="@+id/block_active"
         android:title="Active"/>
     <item

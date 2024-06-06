@@ -24,6 +24,8 @@ class CensusApp : Application() {
     @Inject
     lateinit var homeRepository: HomeRepository
 
+
+
     override fun onCreate() {
         super.onCreate()
         context = applicationContext

@@ -1,6 +1,7 @@
 package com.census.ui.blockverification
 
 
+import androidx.lifecycle.MutableLiveData
 import com.census.ui.base.BaseViewModel
 import com.census.ui.repository.AuthRepository
 import com.census.utils.SingleLiveEvent
@@ -17,34 +18,12 @@ class BlockVerificationActivityViewModel @Inject constructor() : BaseViewModel()
     lateinit var repository: AuthRepository
 
 
-
-
-
-
-
-
     val event = SingleLiveEvent<@BlockVerificationActivityClickEvents Int>()
+    val isErrorTextShowing = MutableLiveData(false)
 
-/*    fun test(user: Users){
-        viewModelScope.launch {
-            userRepository.insert(user)
-        }
 
-    }
-    fun addQuestion(question:Question){
-        viewModelScope.launch {
-            userRepository.insertQuestion(question)
-        }
-    }
-    fun getQuestions(){
-        viewModelScope.launch {
-            var question:List<Question>
-            question=userRepository.getQuestions()
-            Log.d("show_question","${question}")
-        }
-        }*/
-    fun onClick(){
-        event.value=BlockVerificationActivity.ON_CLICK_CLICK
+    fun onCaptureLocationClick(){
+        event.value=BlockVerificationActivity.ON_CAPTURE_LOCATION_CLICK
     }
 
     fun onBackPress() {

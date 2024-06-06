@@ -143,7 +143,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Complete"
                 app:layout_constraintBottom_toBottomOf="@id/ivDots"
                 app:layout_constraintEnd_toStartOf="@+id/ivDots"
                 app:layout_constraintTop_toTopOf="@id/ivDots" />

@@ -3,18 +3,248 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.census.ui.blockverification.BlockVerificationActivityViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <org.osmdroid.views.MapView
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/map"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvErrorText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/red_color_picker"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/map" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvErrorText">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="20dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProvince"
+                        style="@style/appTextBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Province "
+                        app:layout_constraintEnd_toStartOf="@id/tvProvinceValue"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProvinceValue"
+                        style="@style/appText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Punjab"
+                        app:layout_constraintBottom_toBottomOf="@id/tvProvince"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvProvince"
+                        app:layout_constraintTop_toTopOf="@id/tvProvince" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDistrict"
+                        style="@style/appTextBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="District "
+                        app:layout_constraintEnd_toStartOf="@id/tvDistrictValue"
+                        app:layout_constraintStart_toStartOf="@id/tvProvince"
+                        app:layout_constraintTop_toBottomOf="@id/tvProvince" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDistrictValue"
+                        style="@style/appText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Lahore"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDistrict"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvDistrict"
+                        app:layout_constraintTop_toTopOf="@id/tvDistrict" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTehsil"
+                        style="@style/appTextBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Tehsil: "
+                        app:layout_constraintEnd_toStartOf="@id/tvTehsilValue"
+                        app:layout_constraintStart_toStartOf="@id/tvDistrict"
+                        app:layout_constraintTop_toBottomOf="@id/tvDistrict" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTehsilValue"
+                        style="@style/appText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Lahore"
+                        app:layout_constraintBottom_toBottomOf="@id/tvTehsil"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvTehsil"
+                        app:layout_constraintTop_toTopOf="@id/tvTehsil" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCity"
+                        style="@style/appTextBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="City "
+                        app:layout_constraintEnd_toStartOf="@id/tvCityValue"
+                        app:layout_constraintStart_toStartOf="@id/tvTehsil"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTehsil" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCityValue"
+                        style="@style/appText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Lahore"
+                        app:layout_constraintBottom_toBottomOf="@id/tvCity"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvCity"
+                        app:layout_constraintTop_toTopOf="@id/tvCity" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFileName"
+                        style="@style/appTextBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="File Name: "
+                        app:layout_constraintEnd_toStartOf="@id/tvFileNameValue"
+                        app:layout_constraintStart_toStartOf="@id/tvCity"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCity" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFileNameValue"
+                        style="@style/appText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Lahore Office"
+                        app:layout_constraintBottom_toBottomOf="@id/tvFileName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvFileName"
+                        app:layout_constraintTop_toTopOf="@id/tvFileName" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnCaptureLocation"
+                style="@style/appText"
+                rapidOnClick="@{()->viewModel.onCaptureLocationClick()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_btn"
+                android:elevation="10dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:text="Capture Location"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvDetails" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnProceed"
+                style="@style/appText"
+                rapidOnClick="@{()->viewModel.onCaptureLocationClick()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_btn_green"
+                android:elevation="10dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp"
+                android:text="Proceed"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/btnCaptureLocation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvDetails"
+                app:layout_constraintTop_toTopOf="@id/btnCaptureLocation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
 </layout>
